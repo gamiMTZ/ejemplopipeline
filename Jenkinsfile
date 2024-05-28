@@ -10,7 +10,7 @@
         stage('Obtener código') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/gamiMTZ/ejemplopipeline.git'
+                git clone 'https://github.com/gamiMTZ/ejemplopipeline.git'
 
                 // Run Maven on a Unix agent.
                 //sh "mvn -Dmaven.test.failure.ignore=true clean package"
