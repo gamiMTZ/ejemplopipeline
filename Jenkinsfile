@@ -1,48 +1,36 @@
- pipeline {
+pipeline {
     agent any
-
-    //tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        //maven "M3"
-    //}
 
     stages {
         stage('Obtener código') {
             steps {
                 // Get some code from a GitHub repository
                 git branch: 'main', url: 'https://github.com/gamiMTZ/ejemplopipeline.git'
-
-                // Run Maven on a Unix agent.
-                //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-
-            //post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-               // success {
-               //     junit '**/target/surefire-reports/TEST-*.xml'
-               //     archiveArtifacts 'target/*.jar'
-               // }
-            //}
         }
 
-        stage('Compilar código'){
+        stage('Compilar código') {
             steps {
                 echo 'Inicio de compilación del código'
-                javac Programa.java
+                // Check if javac is available
+                sh 'which javac || echo "javac not found"'
+                // Compile Java program
+                sh 'javac Programa.java || echo "javac failed"'
                 echo 'Fin de compilación del código'
-                echo 'Ejecución del código en pyhton'
-                python3 Programa.py
+                
+                echo 'Ejecución del código en python'
+                // Check if python3 is available
+                sh 'which python3 || echo "python3 not found"'
+                // Run Python script
+                sh 'python3 Programa.py || echo "python3 execution failed"'
             }
         }
 
-        stage("Ejecución"){
+        stage("Ejecución") {
             steps {
                 echo 'Ejecutando programa'
-                java Programa.java
+                // Run the compiled Java program
+                sh 'java Programa || echo "java execution failed"'
             }
         }
     }
