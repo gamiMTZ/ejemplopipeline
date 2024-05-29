@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Ejecución código Python') {
+        /*stage('Ejecución código Python') {
             steps {
                 echo 'Ejecución del código en Python'
                 // Check if python3 is available
@@ -33,7 +33,7 @@ pipeline {
                 // Run Python script
                 sh 'python3 Programa.py'
             }
-        }
+        }*/
 
         stage('Test') {
             steps {
