@@ -26,6 +26,20 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                script {
+                    // Search for the method showInConsole in Programa.java
+                    def result = sh(script: 'grep -q "mostrarEnConsola()" Programa.java', returnStatus: true)
+                    if (result != 0) {
+                        error('Method mostrarEnConsola() not found in Programa.java')
+                    } else {
+                        echo 'Method mostrarEnConsola() found in Programa.java'
+                    }
+                }
+            }
+        }
+        
         stage("Ejecución") {
             steps {
                 echo 'Ejecutando programa'
