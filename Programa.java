@@ -3,4 +3,4 @@ public class Programa {
 		System.out.println("El proyecto compilado funciona :v");
 	}
 }
-//
+// mostrarEnConsola()
