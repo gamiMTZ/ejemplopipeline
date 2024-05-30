@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-    environment {
+    /*environment {
         DOCKERHUB_CREDENTIALS = credentials('gamiMTZ-Docker-creds') // Replace with your Docker Hub credentials ID
         DOCKERHUB_REPO = 'gamimtz/my-jenkins-images'
-    }
+    }*/
 
     stages {
         stage('Obtener código') {
@@ -47,7 +47,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        /*stage('Build Docker Image') {
             steps {
                 script {
                     def dockerImage = docker.build("${env.DOCKERHUB_REPO}:${env.BUILD_NUMBER}")
@@ -57,7 +57,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
     }
 
     post {
