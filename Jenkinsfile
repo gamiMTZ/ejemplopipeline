@@ -25,20 +25,10 @@ pipeline {
             }
         }
 
-        /*stage('Ejecución código Python') {
-            steps {
-                echo 'Ejecución del código en Python'
-                // Check if python3 is available
-                sh 'which python3'
-                // Run Python script
-                sh 'python3 Programa.py'
-            }
-        }*/
-
         stage('Test') {
             steps {
                 script {
-                    //busca el método mostrarEnConsola en Programa.java
+                    // Search for the method mostrarEnConsola in Programa.java
                     def result = sh(script: 'grep -q "mostrarEnConsola()" Programa.java', returnStatus: true)
                     if (result != 0) {
                         error('Method mostrarEnConsola() not found in Programa.java')
